@@ -44,7 +44,7 @@
         // create the ground plane
 
         planeWidth=70;
-        planeHeight=45;
+        planeHeight=60;
         var planeGeometry = new THREE.PlaneGeometry(planeWidth,planeHeight,1,1);
         // PlaneGeometry(width, height, widthSegments, heightSegments) widthSegments y heightSegments son parametros opcionales y son 1 por defecto
 
@@ -149,7 +149,9 @@
             this.pyramidRotationSpeed=0.02;
             this.torusRotationSpeed=0.02;
             this.bouncingSpeed = 0.03;
+            this.sphereRadius = 4;
         }
+
 
 
         var gui = new dat.GUI();
@@ -158,16 +160,21 @@
         gui.add(controls,'pyramidRotationSpeed',0,0.5);
         gui.add(controls,'torusRotationSpeed',0,0.5);
         gui.add(controls, 'bouncingSpeed',0,0.5);
-
+        gui.add(controls,'sphereRadius',4,16);
         render();
 
         function render() {
+            var radius=controls.sphereRadius; //variable que ayuda a cambiar la escala de la esfera
+
             stats.update();
             // rotate the cube around its axes
             cube.rotation.x += controls.cubeRotationSpeed;
             cube.rotation.y += controls.cubeRotationSpeed;
             cube.rotation.z += controls.cubeRotationSpeed;
-
+            var scala= radius*0.2;
+            sphere.scale.x =scala;
+            sphere.scale.y =scala;
+            sphere.scale.z= scala;
             // bounce the sphere up and down
             step+=controls.bouncingSpeed;
 
