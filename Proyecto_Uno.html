@@ -75,8 +75,8 @@
         // add the cube to the scene
         scene.add(cube);
 
-        var sphereRatio=4;
-        var sphereGeometry = new THREE.SphereGeometry(sphereRatio,20,20);
+        var radius_sphera=4;
+        var sphereGeometry = new THREE.SphereGeometry(radius_sphera,20,20);
         var sphereMaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
         var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
 
@@ -150,6 +150,7 @@
             this.torusRotationSpeed=0.02;
             this.bouncingSpeed = 0.03;
             this.sphereRadius = 4;
+            this.reboundDistance = 10;
         }
 
 
@@ -161,6 +162,7 @@
         gui.add(controls,'torusRotationSpeed',0,0.5);
         gui.add(controls, 'bouncingSpeed',0,0.5);
         gui.add(controls,'sphereRadius',4,16);
+        gui.add(controls,'reboundDistance',10,30);
         render();
 
         function render() {
@@ -171,7 +173,7 @@
             cube.rotation.x += controls.cubeRotationSpeed;
             cube.rotation.y += controls.cubeRotationSpeed;
             cube.rotation.z += controls.cubeRotationSpeed;
-            var scala= radius*0.25;
+            var scala= radius/radius_sphera;
             sphere.scale.x =scala;
             sphere.scale.y =scala;
             sphere.scale.z= scala;
@@ -179,8 +181,8 @@
             step+=controls.bouncingSpeed;
 
             //Salto de la esfera
-            sphere.position.x = 20+( 10*(Math.cos(step)));
-            sphere.position.y = 2 +( 10*Math.abs(Math.sin(step)));
+            sphere.position.x =  controls.reboundDistance*(Math.cos(step));
+            sphere.position.y = 2+( 10*Math.abs(Math.sin(step)));
 
             //Rotacion del toroide
             torus.rotation.x+=controls.torusRotationSpeed;
