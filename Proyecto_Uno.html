@@ -32,7 +32,7 @@
         var scene = new THREE.Scene();
 
         // create a camera, which defines where we're looking at.
-        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
 
         // create a render and set the size
         var renderer = new THREE.WebGLRenderer();
@@ -70,7 +70,7 @@
         // position the cube
         cube.position.x=-6;
         cube.position.y=3;
-        cube.position.z=3;
+        cube.position.z=25;
 
         // add the cube to the scene
         scene.add(cube);
@@ -83,7 +83,7 @@
         // position the sphere
         sphere.position.x=20;
         sphere.position.y=0;
-        sphere.position.z=-2;
+        sphere.position.z=4;
         sphere.castShadow=true;
 
         // add the sphere to the scene
@@ -117,7 +117,7 @@
         //posiciones de la piramide dentro del plano
         pyramid.position.x=30;
         pyramid.position.y=12;
-        pyramid.position.z=20;
+        pyramid.position.z=-15;
         pyramid.castShadow=true;
 
         scene.add(pyramid);        
@@ -160,7 +160,7 @@
         //valor inicial 0 valor final 0.5
         gui.add(controls,'pyramidRotationSpeed',0,0.5);
         gui.add(controls,'torusRotationSpeed',0,0.5);
-        gui.add(controls, 'bouncingSpeed',0,0.5);
+        gui.add(controls, 'bouncingSpeed',0.03,0.5);
         gui.add(controls,'sphereRadius',4,16);
         gui.add(controls,'reboundDistance',10,30);
 
@@ -174,10 +174,9 @@
         var controllers=[gui.add(view,'Axis_X').listen(),gui.add(view,'Axis_Y').listen(),gui.add(view,'Axis_Z').listen()];
         //manejadores/controladores de los checkbutton
         render();
-
         function render() {
             var radius=controls.sphereRadius; //variable que ayuda a cambiar la escala de la esfera
-
+            var xini=20,xfin=0;
             stats.update();
             // rotate the cube around its axes
             cube.rotation.x += controls.cubeRotationSpeed;
@@ -188,11 +187,10 @@
             sphere.scale.y =scala;
             sphere.scale.z= scala;
             // bounce the sphere up and down
-            step+=controls.bouncingSpeed;
-
             //Salto de la esfera
+            step+=controls.bouncingSpeed;
             sphere.position.x =  controls.reboundDistance*(Math.cos(step));
-            sphere.position.y = 2+( 10*Math.abs(Math.sin(step)));
+            sphere.position.y = controls.sphereRadius+( 10*Math.abs(Math.sin(step)))
 
             //Rotacion del toroide
             for(var i in controllers){
