@@ -7,6 +7,7 @@
 		<h2> <b>
 			<center>Bit&aacute;cora de Actividades:</center>
 		</b> <h2>
+
 		<p >
 			<h4>
 			<b>Integrantes:<br></b>
@@ -15,7 +16,59 @@
 				Jorge Vergara Palma<br>
 		    </h4>
 		</p>
+		<hr/>
+		<p>
+			<h4>
+				<b>Primer d&iacute;a:</b>
+			</h4>
+			Fecha: jueves 29 de mayo del 2014.<br>
+			Hora: 4:30 pm a 5:30 pm<br>
+			Lugar: Plazoleta de la Fiec Espol<br>
+			Asistencia: todos fuimos.<br>
+			Actividades: Descargamos el archivo inicial del proyecto y las librer&iacute;as desde el SIDWeb, no nos funcionaba el ejemplo, as&iacute; que se acabó la reunión, pero en la noche con m&aacute;s calma Rodrigo lo pudo ejecutar, s&oacute;lo estaba mal la ubicaci&oacute;n de las librer&iacute;as; en ese misma noche &eacute;l agreg&oacute; la pir&aacute;mide y el toroide, adem&aacute;s los controles para controlar la velocidad de su rotaci&oacute;n. La informaci&oacute;n de donde encontr&oacute; como dibujar dichas figuras fue obtenida de la <a href="http://threejs.org/docs/#Reference/Extras.Geometries/TorusGeometry ">documentaci&oacute;n oficial de Three.js</a><br>
+			Tambi&eacute;n se cre&oacute; un repositorio en Github:  <a href="https://github.com/rodrigoCastroReyes/Computer_Graphics_Threejs"> Repositorio</a><br>
+			Eso fue todo lo que se avanz&oacute; ese d&iacute;a.
+
+		</p>
 		
-		
+		<hr/>
+		<p>
+			<h4>
+				<b>Segundo d&iacute;a: </b>
+			</h4>
+			Fecha: viernes 30 de mayo del 2014.<br>
+			Hora: 7:30 pm<br>
+			Lugar: no hubo reuni&oacute;n, cada quien trabaj&oacute; en su casa.<br>
+			Actividades: Oswaldo hizo clone al repositorio, revis&oacute; los avances de Rodrigo; Oswaldo puso el control para hacer el cambio din&aacute;mico del radio de la esfera, el problema fue que no era posible variar el radio una vez dibujada la esfera. Las soluciones eran: Borrar la esfera y dibujar otra con el nuevo radio, la complicaci&oacute;n de esto es que la esfera esta en movimiento as&iacute;  que al dibujar la nueva esfera se debe obtener primero la posici&oacute;n actual de la esfera, no se opt&oacute; por esta soluci&oacute;n; la otra opci&oacute;n es escalar la esfera, lo cual es m&aacute;s f&aacute;cil, se escogi&iacute; esta soluci&oacute;n; el nuevo radio ser&aacute; el radio actual multiplicado por la escala, la escala se calcula como la divisi&oacute;n entre el radio deseado y el radio inicial, la idea de estas soluciones fueron tomadas de: <a href="http://stackoverflow.com/questions/10025487/webgl-threejs-three-mesh-position-issue">fuente</a><br>
+
+		</p>
+		<hr/>
+		<p>
+			<h4>
+				<b>Tercer d&iacute;a:</b>
+			</h4>
+			Fecha: s&aacute;bado 31 de mayo del 2014.
+			Hora: 5:30 pm
+			Lugar: no hubo reuni&oacute;n, cada quien trabaj&oacute; en su casa.
+			Actividades: Oswaldo agreg&oacute; el control para hacer el cambio din&aacute;mico de la distancia del rebote de la esfera, s&oacute;lo hab&iacute;a que cambiar la amplitud de una funci&oacute;n coseno que hace variar la posici&oacute;n de la esfera, la amplitud fue reemplazada por el valor de la distancia que tiene el control. Rodrigo puso los check buttons para elegir el eje de rotación del toroide, esa informaci&oacute;n fue obtenida de esta fuente: <a href="http://stackoverflow.com/questions/11555783/mutually-exclusive-checkbox-using-dat-gui-js-api">fuente</a><br>
+			
+
+
+		</p>
+
+		<hr/>
+		<p>
+			<h4>
+				<b>Cuarto d&iacute;a: </b>
+			</h4>
+			Fecha: domingo 1 de junio del 2014.
+			Hora: 11:30 pm
+			Lugar: no hubo reuni&oacute;n, cada quien trabaj&oacute; en su casa.
+			Actividades: Jorge not&oacute; un problema con la esfera, al aumentar el tama&#241;o del radio la esfera se cruzaba con el plano y con el cubo, &eacute;l mejor&oacute; el rebote de la esfera, cambi&oacute; la expresi&oacute;n que define el valor de la posici&oacute;n en y, ahora estaba en funci&oacute;n del radio que tomaba la esfera; para corregir el cruce con el cubo, se lo movi&oacute; un poco.
+			Cambi&oacute; la posici&oacute;n de la pir&aacute;mide porque los controles la tapaban, adem&aacute;s movi&oacute; la posici&oacute;n y modific&oacute; la inclinaci&oacute;n de la c&aacute;mara para apreciar mejor la escena.
+			Tambi&eacute;n cambio el comportamiento de los check buttons para que la selecci&oacute;n sea mutuamente excluyente, esta informaci&oacute;n se la saco de la siguiente fuente: <a href="http://stackoverflow.com/questions/11555783/mutually-exclusive-checkbox-using-dat-gui-js-api">fuente</a><br>. 
+
+
+		</p>
 	</body>
 </html>
