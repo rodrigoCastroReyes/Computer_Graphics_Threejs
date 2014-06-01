@@ -170,8 +170,27 @@
         view.Axis_X =flags[0];//rotacion en el eje x: se inicializa el checkbutton en marcado
         view.Axis_Y=flags[1];//rotacion en el eje y: se inicializa el checkbutton en desmarcado
         view.Axis_Z=flags[2];//rotacion en el eje z: se inicializa el checkbutton en desmarcado
+        var cb1=gui.add(view,'Axis_X').listen();
+        var cb2=gui.add(view,'Axis_Y').listen();
+        var cb3=gui.add(view,'Axis_Z').listen();
+        
+        //sobreescribimos el metodo que se llama al momente de que el combo sea aplastado
+        cb1.onChange(function(value){
+            view.Axis_X = true;
+            view.Axis_Y = false;
+            view.Axis_Z = false;
+        });
+        cb2.onChange(function(value){
+            view.Axis_X = false;
+            view.Axis_Y = true;
+            view.Axis_Z = false;
+        });
+        cb3.onChange(function(value){
+            view.Axis_X = false;
+            view.Axis_Y = false;
+            view.Axis_Z = true;
+        });
 
-        var controllers=[gui.add(view,'Axis_X').listen(),gui.add(view,'Axis_Y').listen(),gui.add(view,'Axis_Z').listen()];
         //manejadores/controladores de los checkbutton
         render();
         function render() {
@@ -193,10 +212,6 @@
             sphere.position.y = controls.sphereRadius+( 10*Math.abs(Math.sin(step)))
 
             //Rotacion del toroide
-            for(var i in controllers){
-                handleEvents(i);
-            }
-
             if(view.Axis_X){
                 torus.rotation.x+=controls.torusRotationSpeed;
             }
@@ -217,21 +232,7 @@
             renderer.render(scene, camera);
 
         }
-
-         function handleEvents(axis){
-            controllers[axis].onChange(function(value){
-                if(value){
-                        flags[axis]=true;
-                }else{
-                        flags[axis]=false;
-                }
-            });
-            
-        }
     
-
-
-
 
         function initStats() {
 
