@@ -163,6 +163,16 @@
         gui.add(controls, 'bouncingSpeed',0,0.5);
         gui.add(controls,'sphereRadius',4,16);
         gui.add(controls,'reboundDistance',10,30);
+
+        var flags=[true,false,false]; //conjunto de banderas 
+
+        var view=this;
+        view.Axis_X =flags[0];//rotacion en el eje x: se inicializa el checkbutton en marcado
+        view.Axis_Y=flags[1];//rotacion en el eje y: se inicializa el checkbutton en desmarcado
+        view.Axis_Z=flags[2];//rotacion en el eje z: se inicializa el checkbutton en desmarcado
+
+        var controllers=[gui.add(view,'Axis_X').listen(),gui.add(view,'Axis_Y').listen(),gui.add(view,'Axis_Z').listen()];
+        //manejadores/controladores de los checkbutton
         render();
 
         function render() {
@@ -185,7 +195,40 @@
             sphere.position.y = 2+( 10*Math.abs(Math.sin(step)));
 
             //Rotacion del toroide
-            torus.rotation.x+=controls.torusRotationSpeed;
+            for(var i in controllers){
+                handleEvents(i);
+            }
+
+            if(view.Axis_X){
+                torus.rotation.x+=controls.torusRotationSpeed;
+            }
+
+            if(view.Axis_Y){
+                torus.rotation.y+=controls.torusRotationSpeed;
+            }
+
+            if(view.Axis_Z){
+                torus.rotation.z+=controls.torusRotationSpeed;
+            }
+
+            var i;
+            for(i in controllers){
+                handleEvents(i);
+            }
+
+            if(view.Axis_X){
+                torus.rotation.x+=controls.torusRotationSpeed;
+            }
+
+            if(view.Axis_Y){
+                torus.rotation.y+=controls.torusRotationSpeed;
+            }
+
+            if(view.Axis_Z){
+                torus.rotation.z+=controls.torusRotationSpeed;
+            }
+            
+
             //Rotacion de la piramide
             pyramid.rotation.y+=controls.pyramidRotationSpeed;
 
@@ -194,6 +237,21 @@
             renderer.render(scene, camera);
 
         }
+
+         function handleEvents(axis){
+            controllers[axis].onChange(function(value){
+                if(value){
+                        flags[axis]=true;
+                }else{
+                        flags[axis]=false;
+                }
+            });
+            
+        }
+    
+
+
+
 
         function initStats() {
 
