@@ -42,7 +42,7 @@
         renderer.shadowMapEnabled = true;
 
         // create the ground plane
-
+        //dimensiones del plano
         planeWidth=70;
         planeHeight=60;
         var planeGeometry = new THREE.PlaneGeometry(planeWidth,planeHeight,1,1);
@@ -52,54 +52,58 @@
         var plane = new THREE.Mesh(planeGeometry,planeMaterial);
         plane.receiveShadow  = true;
 
-        // rotate and position the plane
+        // rotacion y posicion del plano
         plane.rotation.x=-0.5*Math.PI;
         plane.position.x=5;
         plane.position.y=0
         plane.position.z=0
 
-        // add the plane to the scene
+        // se añade el plano a la escena
         scene.add(plane);
 
-        // create a cube
+        // cubo
         var cubeGeometry = new THREE.CubeGeometry(4,4,4);
         var cubeMaterial = new THREE.MeshLambertMaterial({color: 0xff0000});
         var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
         cube.castShadow = true;
 
-        // position the cube
+        // posicion del cubo
         cube.position.x=-6;
         cube.position.y=3;
         cube.position.z=25;
 
-        // add the cube to the scene
+        // se añade el cubo a la escena
         scene.add(cube);
 
-        var radius_sphera=4;
+        //esfera
+        var radius_sphera=4;//radio de la esfera
         var sphereGeometry = new THREE.SphereGeometry(radius_sphera,20,20);
         var sphereMaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
         var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
 
-        // position the sphere
+        // posicion de la esfera
         sphere.position.x=20;
         sphere.position.y=0;
         sphere.position.z=4;
         sphere.castShadow=true;
 
-        // add the sphere to the scene
+        // se añade la esfera a la escena
         scene.add(sphere);
         
         //toroide
         var torusGeometry=new THREE.TorusGeometry(5,3,10,20,Math.Pi*2);
         // TorusGeometry(radius, tube, radialSegments, tubularSegments, arc) 
-        var torusMaterial=new THREE.MeshLambertMaterial({color: 0xffff00});
-        // tipo de material del toroide
+        
+        var torusMaterial=new THREE.MeshLambertMaterial({color: 0xffff00});// tipo de material del toroide
+        
         var torus=new THREE.Mesh(torusGeometry,torusMaterial);//se construye el toroide
-        //posiciones del toroide dentro del plano:
+        
+        //posiciones del toroide 
         torus.position.x=-20;
         torus.position.y=12;
         torus.position.z=-17;
         torus.castShadow=true;
+
         scene.add(torus);//se añade el toroide a la escena
         
         //piramide
@@ -108,19 +112,19 @@
         height: altura de la piramide
         radiusSegments: numero de segmentos que se usara para formar las caras superior e inferior, 4 para que la base sea un cuadrado
         heightSegments 1 por defecto
-        openEnded: indica si los extremos del cilindo estan abiertos o cubiertos, false por defecto
+        openEnded: indica si los extremos del cilindo estan abiertos(true) o cubiertos(false), false por defecto
          */
-        var pyramidMaterial=new THREE.MeshLambertMaterial({color: 0x2ef72e});
+        var pyramidMaterial=new THREE.MeshLambertMaterial({color: 0x2ef72e}); //tipo de material de la piramide
 
         var pyramid=new THREE.Mesh(pyramidGeometry,pyramidMaterial);//se construye la piramide
 
-        //posiciones de la piramide dentro del plano
+        //posiciones de la piramide 
         pyramid.position.x=30;
         pyramid.position.y=12;
         pyramid.position.z=-15;
         pyramid.castShadow=true;
 
-        scene.add(pyramid);        
+        scene.add(pyramid); //se añade la piramide a la escena       
    
         // position and point the camera to the center of the scene
         camera.position.x = -30;
@@ -164,17 +168,15 @@
         gui.add(controls,'sphereRadius',4,16);
         gui.add(controls,'reboundDistance',10,30);
 
-        var flags=[true,false,false]; //conjunto de banderas 
-
         var view=this;
-        view.Axis_X =flags[0];//rotacion en el eje x: se inicializa el checkbutton en marcado
-        view.Axis_Y=flags[1];//rotacion en el eje y: se inicializa el checkbutton en desmarcado
-        view.Axis_Z=flags[2];//rotacion en el eje z: se inicializa el checkbutton en desmarcado
+        view.Axis_X =true;//rotacion en el eje x: se inicializa el checkbutton en marcado
+        view.Axis_Y=false;//rotacion en el eje y: se inicializa el checkbutton en desmarcado
+        view.Axis_Z=false;//rotacion en el eje z: se inicializa el checkbutton en desmarcado
         var cb1=gui.add(view,'Axis_X').listen();
         var cb2=gui.add(view,'Axis_Y').listen();
         var cb3=gui.add(view,'Axis_Z').listen();
         
-        //sobreescribimos el metodo que se llama al momente de que el combo sea aplastado
+        //sobreescribimos el metodo onChange que se llama al momento de que el combobox es presionado
         cb1.onChange(function(value){
             view.Axis_X = true;
             view.Axis_Y = false;
@@ -191,8 +193,8 @@
             view.Axis_Z = true;
         });
 
-        //manejadores/controladores de los checkbutton
         render();
+
         function render() {
             var radius=controls.sphereRadius; //variable que ayuda a cambiar la escala de la esfera
             var xini=20,xfin=0;
