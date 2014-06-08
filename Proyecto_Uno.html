@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
     <title>Example 01.05 - Control gui</title>
-    <script type="text/javascript" src="lib_three/build/three.min.js"></script>
-    <script type="text/javascript" src="jquery-1.9.0.js"></script>
-    <script type="text/javascript" src="lib_three/examples/js/libs/dat.gui.min.js"></script>
-    <script type="text/javascript" src="lib_three/examples/js/libs/stats.min.js"></script>
+    <script type="text/javascript" src="../libs/three.js"></script>
+    <script type="text/javascript" src="../libs/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="../libs/stats.js"></script>
+    <script type="text/javascript" src="../libs/dat.gui.js"></script>
     <style>
         body{
             /* set margin to 0 and overflow to hidden, to go fullscreen */
@@ -149,34 +150,37 @@
         var step=0;
 
         var controls = new function() {
-            this.cubeRotationSpeed = 0.02;
-            this.pyramidRotationSpeed=0.02;
-            this.torusRotationSpeed=0.02;
-            this.bouncingSpeed = 0.03;
-            this.sphereRadius = 4;
-            this.reboundDistance = 10;
+            this.cubeRotationSpeed = 0.02;//controlador de la velocidad de rotacion del cubo
+            this.pyramidRotationSpeed=0.02;//controlador de la velocidad de rotacion del piramide
+            this.torusRotationSpeed=0.02;//controlador de la velocidad de rotacion del toroide
+            this.bouncingSpeed = 0.03;//velocidad con la que la esfera salta
+            this.sphereRadius = 4;//controlador del radio de la esfera
+            this.reboundDistance = 10;//controlador de la distancia del salto de la esfera
         }
 
 
 
         var gui = new dat.GUI();
+        //se añaden los controles
+
         gui.add(controls, 'cubeRotationSpeed',0,0.5);
         //valor inicial 0 valor final 0.5
         gui.add(controls,'pyramidRotationSpeed',0,0.5);
         gui.add(controls,'torusRotationSpeed',0,0.5);
         gui.add(controls, 'bouncingSpeed',0.03,0.5);
-        gui.add(controls,'sphereRadius',4,16);
-        gui.add(controls,'reboundDistance',10,30);
+        gui.add(controls,'sphereRadius',4,16);//valor inicial 4 y maximo 16
+        gui.add(controls,'reboundDistance',10,30);//valor iicial 10 y maximo 30
 
         var view=this;
         view.Axis_X =true;//rotacion en el eje x: se inicializa el checkbutton en marcado
         view.Axis_Y=false;//rotacion en el eje y: se inicializa el checkbutton en desmarcado
         view.Axis_Z=false;//rotacion en el eje z: se inicializa el checkbutton en desmarcado
+        //manejadores de eventos
         var cb1=gui.add(view,'Axis_X').listen();
         var cb2=gui.add(view,'Axis_Y').listen();
         var cb3=gui.add(view,'Axis_Z').listen();
         
-        //sobreescribimos el metodo onChange que se llama al momento de que el combobox es presionado
+        //sobreescribimos el metodo onChange que se llama al momento que el comboBox es presionado
         cb1.onChange(function(value){
             view.Axis_X = true;
             view.Axis_Y = false;
@@ -199,7 +203,7 @@
             var radius=controls.sphereRadius; //variable que ayuda a cambiar la escala de la esfera
             var xini=20,xfin=0;
             stats.update();
-            // rotate the cube around its axes
+            // rotacion del cubo alrededor de sus ejes
             cube.rotation.x += controls.cubeRotationSpeed;
             cube.rotation.y += controls.cubeRotationSpeed;
             cube.rotation.z += controls.cubeRotationSpeed;
@@ -207,7 +211,6 @@
             sphere.scale.x =scala;
             sphere.scale.y =scala;
             sphere.scale.z= scala;
-            // bounce the sphere up and down
             //Salto de la esfera
             step+=controls.bouncingSpeed;
             sphere.position.x =  controls.reboundDistance*(Math.cos(step));
