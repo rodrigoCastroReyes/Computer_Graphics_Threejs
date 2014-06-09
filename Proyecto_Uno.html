@@ -201,20 +201,25 @@
 
         function render() {
             var radius=controls.sphereRadius; //variable que ayuda a cambiar la escala de la esfera
-            var xini=20,xfin=0;
             stats.update();
             // rotacion del cubo alrededor de sus ejes
             cube.rotation.x += controls.cubeRotationSpeed;
             cube.rotation.y += controls.cubeRotationSpeed;
             cube.rotation.z += controls.cubeRotationSpeed;
             var scala= radius/radius_sphera;
+            //la escala de la esfera sera el radio deseado dividido por el radio inicial
+            /* Por ejemplo se selecciona radio 12, entonces la escala sera 12/4 = 3
+            al realizar escalamiento, las dimensiones son multiplicadas por 3, dando como resltado 12, el radio deseado
+            */
+
+            //Se realiza el escalamiento
             sphere.scale.x =scala;
             sphere.scale.y =scala;
             sphere.scale.z= scala;
             //Salto de la esfera
             step+=controls.bouncingSpeed;
-            sphere.position.x =  controls.reboundDistance*(Math.cos(step));
-            sphere.position.y = controls.sphereRadius+( 10*Math.abs(Math.sin(step)))
+            sphere.position.x =  controls.reboundDistance*(Math.cos(step)); // la amplitud de la funcion coseno depende de la distancia
+            sphere.position.y = controls.sphereRadius+( 10*Math.abs(Math.sin(step))) //la altura en y depende del radio actual
 
             //Rotacion del toroide
             if(view.Axis_X){
